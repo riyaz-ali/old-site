@@ -1,0 +1,51 @@
+---
+layout: default
+---
+
+<!-- Page Header -->
+{% if page.background %}
+  <header class="masthead" style="background-image: url('{{ page.background }}')">
+{% else %}
+  <header class="masthead">
+{% endif %}
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>{{ site.title }}</h1>
+            {% if site.description %}
+              <span class="subheading">{{ site.description }}</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto post-list">
+        <h2 class="hr"><span>BLOG</span></h2>
+
+        <!-- Home Post List -->
+        {% for post in site.posts %}
+          <article class="post-preview" style="background-image: url('{{ post.background }}')">
+            <div class="overlay"></div>
+            <div class="content">
+            <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
+              <h2 class="post-title">{{ post.title }}</h2>
+              {% if post.subtitle %}
+                <h4 class="post-subtitle">{{ post.subtitle }}</h4>
+              {% else %}
+                <h4 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 20 }}</h4>
+              {% endif %}
+            </a>
+
+            <p class="post-meta">Posted on {{ post.date | date: '%B %d, %Y' }}</p>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </div>

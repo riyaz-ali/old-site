@@ -27,7 +27,25 @@ layout: default
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
-      {{ content }}
+      <main class="blog-post">
+        {{ content }}
+      </main>
     </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto post-extras">
+        <a href="/" title="Go back to home page">
+          <img src="/img/home.svg" width="18" height="18" alt="Go back to home page"/>
+        </a>
+        <a href="https://github.com/riyaz-ali/riyaz-ali.github.io" target="_blank" title="View source on Github">
+          <img src="/img/github.svg" width="18" height="18" alt="source code"/>
+        </a>
+        <a href="https://twitter.com/intent/tweet?original_referer={{ site.url | cgi_escape }}{{ page.url | cgi_escape }}&amp;text={{ page.title | uri_escape }}&amp;tw_p=tweetbutton&amp;url={{ site.url | cgi_escape }}{{ page.url | cgi_escape }}&amp;via=riyaz-ali" rel="nofollow" target="_blank" title="Tweet">
+          <img src="/img/tweet.svg" width="18" height="18" alt="Tweet"/>
+        </a>
+      </div>
   </div>
 </div>

@@ -24,7 +24,7 @@ url: "http://localhost:4000" #"https://riyaz-ali.github.io"
 baseurl: "/" # the subpath of your site, e.g. /blog
 
 # permalinks to posts
-permalink: /:title/
+permalink: /:title:output_ext
 
 # Jekyll plugins
 plugins:
