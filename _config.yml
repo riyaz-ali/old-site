@@ -20,7 +20,7 @@ description: >
   My tinkering and findings with code and tech
 
 # Site url config
-url: "http://localhost:4000" #"https://riyaz-ali.github.io"
+url: "https://riyaz-ali.github.io" #"http://localhost:4000"
 baseurl: "/" # the subpath of your site, e.g. /blog
 
 # permalinks to posts
