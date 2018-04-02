@@ -23,6 +23,9 @@ description: >
 url: "https://riyaz-ali.github.io" #"http://localhost:4000"
 baseurl: "/" # the subpath of your site, e.g. /blog
 
+# Google Analytics ID
+google_analytics_id: "UA-116662736-1"
+
 # permalinks to posts
 permalink: /:title:output_ext
 
