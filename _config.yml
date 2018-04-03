@@ -26,6 +26,9 @@ baseurl: "/" # the subpath of your site, e.g. /blog
 # Google Analytics ID
 google_analytics_id: "UA-116662736-1"
 
+#Google site verification
+google_site_verification: "10U1CN6PPZ8eKYLtT7X2fcNOoderMqKPAmLZ02bAzkE"
+
 # permalinks to posts
 permalink: /:title:output_ext
 
