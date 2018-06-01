@@ -15,6 +15,20 @@ So I started looking into ways in which I could've implemented paging with my `R
 
 2. _The new way_ (yeah! you guessed it) is to use [Android Paging Library](https://developer.android.com/topic/libraries/architecture/paging) and the rest of this post is all about how to integrate it!
 
+### Architecture
+
+So you ask, how this Paging Library works?
+
+Well, there are four major components in the Paging Library:
+
+1. `DataSource`: The `DataSource` is where you write code to interact with your source (REST API, sqlite database, etc.) All the requests for data from the `DataSource` are made on a background thread and so you can safely write _synchronous_ code to interact with your source, if you want to. `DataSource` is responsible to load a `List<T>` of your model object given a page/key and implement business logic for the same.
+
+2. `PagedListAdapter<T, VH>`: `PagedListAdapter` is a `RecyclerView.Adapter` which uses a `PagedList` (see below) to load data into the UI. `PagedListAdapter` uses a `DiffUtils.ItemCallback<T>` implementation to calculate _difference_ between your model objects in the list and animates add/remove operations on UI.
+
+3. `DiffUtils.ItemCallback<T>`: The `DiffUtils.ItemCallback<T>` for your model class is utilized by the `PagedListAdapter` to calculate _diff_ between two list and animate changes in the UI. You must provide an implementation of this callback. The callback is executed on a background thread to prevent stalling the UI.
+
+4. `PagedList<T>`: A `PagedList` is a Java-collection which loads it's data in chunks (pages) from a `DataSource`. The `PagedList` connects your `PagedListAdapter` and your `DataSource` together and is responsible to _lazy load_ data by calling appropriate methods on the `DataSource`.
+
 ![Paging Library Architecture](https://cdn-images-1.medium.com/max/800/1*O1acN3yAOS70zbRMfThXrw.gif){: .img-fluid, .center }
 *Paging Library Architecture*
 
@@ -163,7 +177,7 @@ public final class MoviesDataSource
 
 The only thing that remains for us is to connect our `MovieAdapter` with our `MovieDataSource` using a [`PagedList`](https://developer.android.com/reference/android/arch/paging/PagedList). 
 
-A `PagedList` is a Java-collection which loads its data in chunks (pages) from a `DataSource`. To use a `PagedList`, we first create a [`PagedList.Config`](https://developer.android.com/reference/android/arch/paging/PagedList.Config). We also need to create two [`Executor`](https://developer.android.com/reference/java/util/concurrent/Executor) which will be used to _execute_ fetch and notification calls from the `PagedList`, i.e., data fetching via `DataSource` will execute on the _fetch executor_ and load- and boundary- callbacks will be executed by the _notify executor_.
+To use a `PagedList`, we first create a [`PagedList.Config`](https://developer.android.com/reference/android/arch/paging/PagedList.Config). We also need to create two [`Executor`](https://developer.android.com/reference/java/util/concurrent/Executor) which will be used to _execute_ fetch and notification calls from the `PagedList`, i.e., data fetching via `DataSource` will execute on the _fetch executor_ and load- and boundary- callbacks will be executed by the _notify executor_.
 
 ```java
 import java.util.concurrent.Executor;
